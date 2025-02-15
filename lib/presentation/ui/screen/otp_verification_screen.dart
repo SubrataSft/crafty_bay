@@ -1,6 +1,6 @@
 import 'package:crafty_bay/presentation/ui/screen/complete_profile_screen.dart';
 import 'package:crafty_bay/presentation/ui/utils/app_colors.dart';
-import 'package:crafty_bay/presentation/ui/widgets/app_logo_widger.dart';
+import 'package:crafty_bay/presentation/ui/widgets/app_logo_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';

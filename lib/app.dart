@@ -45,6 +45,14 @@ class CraftyBayApp extends StatelessWidget {
           style:TextButton.styleFrom(
             foregroundColor: AppColors.themeColors,
             textStyle: TextStyle(fontSize: 16)
+          ),
+        ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.white,
+          titleTextStyle: TextStyle(
+            color: Colors.black54,
+            fontSize: 22,
+            fontWeight: FontWeight.w500
           )
         )
       ),

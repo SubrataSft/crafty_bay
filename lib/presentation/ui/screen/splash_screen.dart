@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-import '../widgets/app_logo_widger.dart';
+import '../widgets/app_logo_widget.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
