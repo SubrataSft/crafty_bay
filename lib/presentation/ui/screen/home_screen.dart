@@ -1,7 +1,6 @@
 import 'package:crafty_bay/presentation/ui/utils/app_colors.dart';
 import 'package:crafty_bay/presentation/ui/utils/assets_path.dart';
 import 'package:crafty_bay/presentation/ui/widgets/home_banner_slider.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -40,9 +39,17 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             _buildCategoriesSection(),
             SizedBox(
-              height: 140,
+              height: 120,
               child: _buildCategoryListView(),
-            )
+            ),
+            SectionHeader(
+              title: "Popular",
+              onTap: () {},
+            ),
+            SizedBox(
+              height: 120,
+              child: _buildProductListView(),
+            ),
           ],
         ),
       ),
@@ -51,44 +58,73 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildCategoryListView() {
     return ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                            color: AppColors.themeColors.withAlpha(150)),
-                        child: Icon(
-                          Icons.computer,
-                          size: 43,
-                          color: AppColors.themeColors,
-                        ),
-                      ),
-                      SizedBox(height: 4,),
-                      Text(
-                        "Electronic",
-                        style: TextStyle(color: AppColors.themeColors),
-                      )
-                    ],
-                  );
-                },
-                separatorBuilder: (_, __) => SizedBox(
-                      width: 8,
-                    ));
+        scrollDirection: Axis.horizontal,
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return Column(
+            children: [
+              Container(
+                padding: EdgeInsets.all(12),
+                decoration:
+                    BoxDecoration(color: AppColors.themeColors.withAlpha(150)),
+                child: Icon(
+                  Icons.computer,
+                  size: 43,
+                  color: AppColors.themeColors,
+                ),
+              ),
+              SizedBox(
+                height: 4,
+              ),
+              Text(
+                "Electronic",
+                style: TextStyle(color: AppColors.themeColors),
+              )
+            ],
+          );
+        },
+        separatorBuilder: (_, __) => SizedBox(
+              width: 8,
+            ));
+  }
+
+  Widget _buildProductListView() {
+    return ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return Container(
+            width: 120,
+            child: Column(
+              children: [
+                Container(
+                  width: 120,
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                      color: AppColors.themeColors.withAlpha(120),
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                          image: AssetImage(AssetsPath.dummyProductImg))),
+                ),
+              ],
+            ),
+          );
+        },
+        separatorBuilder: (_, __) => SizedBox(
+              width: 8,
+            ));
   }
 
   Widget _buildCategoriesSection() {
     return Column(
-            children: [
-              SectionHeader(
-                title: "Categories",
-                onTap: () {},
-              ),
-              const SizedBox(height: 8),
-            ],
-          );
+      children: [
+        SectionHeader(
+          title: "Categories",
+          onTap: () {},
+        ),
+        const SizedBox(height: 8),
+      ],
+    );
   }
 
   AppBar _buildAppBar() {
