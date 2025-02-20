@@ -1,21 +1,21 @@
 import 'package:get/get_state_manager/get_state_manager.dart';
 
-class BottomNavBarController extends GetxController{
+class BottomNavBarController extends GetxController {
   int _selectedIndex = 0;
 
   int get selectedIndex => _selectedIndex;
 
-  void changeIndex (int index){
+  void changeIndex(int index) {
     _selectedIndex = index;
 
     update();
   }
 
-  void selectCategory(){
+  void selectCategory() {
     changeIndex(1);
-}
-void backToHome(){
-    changeIndex(0);
-}
+  }
 
+  void backToHome() {
+    changeIndex(0);
+  }
 }
