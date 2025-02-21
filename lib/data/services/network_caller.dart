@@ -17,7 +17,8 @@ class NetworkCaller {
         "token": "",
       });
       if (response.statusCode == 200) {
-        _responseLog(url, response.statusCode, response.body, response.headers,true);
+        _responseLog(
+            url, response.statusCode, response.body, response.headers, true);
 
         final decodedBody = jsonDecode(response.body);
         return NetworkResponse(
@@ -25,7 +26,8 @@ class NetworkCaller {
             statusCode: response.statusCode,
             responseData: decodedBody);
       } else {
-        _responseLog(url, response.statusCode, response.body, response.headers,false);
+        _responseLog(
+            url, response.statusCode, response.body, response.headers, false);
 
         return NetworkResponse(
           isSuccess: false,
@@ -33,7 +35,7 @@ class NetworkCaller {
         );
       }
     } catch (e) {
-      _responseLog(url, -1, null, {},true,e);
+      _responseLog(url, -1, null, {}, false, e);
 
       return NetworkResponse(
         isSuccess: false,
@@ -57,21 +59,23 @@ class NetworkCaller {
         body: jsonEncode(body),
       );
       if (response.statusCode == 200) {
-        _responseLog(url, response.statusCode, response.body, response.headers,true);
+        _responseLog(
+            url, response.statusCode, response.body, response.headers, true);
         final decodedBody = jsonDecode(response.body);
         return NetworkResponse(
             isSuccess: true,
             statusCode: response.statusCode,
             responseData: decodedBody);
       } else {
-        _responseLog(url, response.statusCode, response.body, response.headers,false);
+        _responseLog(
+            url, response.statusCode, response.body, response.headers, false);
         return NetworkResponse(
           isSuccess: false,
           statusCode: response.statusCode,
         );
       }
     } catch (e) {
-      _responseLog(url, -1, null, {},true,e);
+      _responseLog(url, -1, null, {}, false, e);
       return NetworkResponse(
         isSuccess: false,
         statusCode: -1,
@@ -91,8 +95,9 @@ class NetworkCaller {
   }
 
   void _responseLog(String url, int statusCode, dynamic responseBody,
-      Map<String, dynamic> headers, bool isSuccess,[dynamic error]) {
-   String message = '''
+      Map<String, dynamic> headers, bool isSuccess,
+      [dynamic error]) {
+    String message = '''
     Url: $url
     Status Code:$statusCode
     Headers:$headers
@@ -100,10 +105,10 @@ class NetworkCaller {
     error : $error
     ''';
 
-  if(isSuccess){
-    logger.i(message);
-  }else{
-    logger.e(message);
+    if (isSuccess) {
+      logger.i(message);
+    } else {
+      logger.e(message);
+    }
   }
-}
 }
