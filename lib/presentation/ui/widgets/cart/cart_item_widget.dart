@@ -26,15 +26,15 @@ class CartItemWidget extends StatelessWidget {
                   children: [
                     Expanded(
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Title is product",
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            ),
-                            _buildColorAndSize(context),
-                          ],
-                        )),
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Title is product",
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        _buildColorAndSize(context),
+                      ],
+                    )),
                     IconButton(
                       onPressed: () {},
                       icon: Icon(Icons.delete),
@@ -52,59 +52,53 @@ class CartItemWidget extends StatelessWidget {
 
   Widget _buildColorAndSize(BuildContext context) {
     return Wrap(
-                            spacing: 8,
-                            children: [
-                              Text(
-                                "Color : Red",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall
-                                    ?.copyWith(
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              Text("Size : XL",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
-                                      ?.copyWith(
-                                    color: Colors.grey,
-                                  )),
-                            ],
-                          );
+      spacing: 8,
+      children: [
+        Text(
+          "Color : Red",
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: Colors.grey,
+              ),
+        ),
+        Text(
+          "Size : XL",
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: Colors.grey,
+              ),
+        ),
+      ],
+    );
   }
 
   Widget _buildPriceAndCounter(TextTheme TextTheme) {
     return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "\$122",
-                    style: TextTheme.titleMedium?.copyWith(
-                        color:AppColors.themeColors
-                    ),
-                  ),
-                  ItemCount(
-                    initialValue: 1,
-                    minValue: 1,
-                    maxValue: 20,
-                    decimalPlaces: 0,
-                    color: AppColors.themeColors,
-                    onChanged: (value) {},
-                  ),
-                ],
-              );
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          "\$122",
+          style: TextTheme.titleMedium?.copyWith(color: AppColors.themeColors),
+        ),
+        ItemCount(
+          initialValue: 1,
+          minValue: 1,
+          maxValue: 20,
+          decimalPlaces: 0,
+          color: AppColors.themeColors,
+          onChanged: (value) {},
+        ),
+      ],
+    );
   }
 
   Widget _buildProductImage() {
     return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset(
-            AssetsPath.dummyProductImg,
-            height: 60,
-            width: 60,
-            fit: BoxFit.scaleDown,
-          ),
-        );
+      padding: const EdgeInsets.all(8.0),
+      child: Image.asset(
+        AssetsPath.dummyProductImg,
+        height: 60,
+        width: 60,
+        fit: BoxFit.scaleDown,
+      ),
+    );
   }
 }

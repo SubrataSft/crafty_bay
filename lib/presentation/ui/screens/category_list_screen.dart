@@ -1,7 +1,10 @@
 import 'package:crafty_bay/presentation/state_holders/bottom_nav_bar_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/category_list_controller.dart';
+import 'package:crafty_bay/presentation/ui/widgets/centered_circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 import '../widgets/category_card.dart';
 
@@ -20,13 +23,32 @@ class CategoryListScreen extends StatelessWidget {
           icon: Icon(Icons.arrow_back_ios),
         ),
       ),
-      body: GridView.builder(
-        itemCount: 20,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 4, childAspectRatio: 1),
-        itemBuilder: (context, index) {
-          return CategoryCard();
+      body: RefreshIndicator(
+        onRefresh: () async {
+          Get.find<CategoryListController>().getCategoryList();
         },
+        child: GetBuilder<CategoryListController>(
+            builder: (categoryListController) {
+
+              if(categoryListController.inProgress){
+                return CenteredCircularProgressIndicator();
+              }else if (categoryListController.errorMessage != null){
+                return Center(
+                  child: Text(categoryListController.errorMessage!),
+                );
+              }
+
+          return GridView.builder(
+            itemCount: categoryListController.categoryList.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4, childAspectRatio: 1),
+            itemBuilder: (context, index) {
+              return CategoryCard(
+                categoryModel: categoryListController.categoryList[index],
+              );
+            },
+          );
+        }),
       ),
     );
   }

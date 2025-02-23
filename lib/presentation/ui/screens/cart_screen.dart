@@ -1,9 +1,7 @@
 import 'package:crafty_bay/presentation/state_holders/bottom_nav_bar_controller.dart';
-import 'package:crafty_bay/presentation/ui/utils/assets_path.dart';
 import 'package:crafty_bay/presentation/ui/widgets/cart/cart_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:item_count_number_button/item_count_number_button.dart';
 
 import '../utils/app_colors.dart';
 

@@ -24,7 +24,8 @@ class NetworkCaller {
         return NetworkResponse(
             isSuccess: true,
             statusCode: response.statusCode,
-            responseData: decodedBody);
+            responseData: decodedBody,
+        );
       } else {
         _responseLog(
             url, response.statusCode, response.body, response.headers, false);
@@ -65,7 +66,8 @@ class NetworkCaller {
         return NetworkResponse(
             isSuccess: true,
             statusCode: response.statusCode,
-            responseData: decodedBody);
+            responseData: decodedBody,
+        );
       } else {
         _responseLog(
             url, response.statusCode, response.body, response.headers, false);
@@ -102,7 +104,7 @@ class NetworkCaller {
     Status Code:$statusCode
     Headers:$headers
     Response Body : $responseBody
-    error : $error
+    Error : $error
     ''';
 
     if (isSuccess) {

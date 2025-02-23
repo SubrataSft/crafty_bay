@@ -27,80 +27,96 @@ class _HomeBannerSliderState extends State<HomeBannerSlider> {
         ),
         child: Column(
           children: [
-            CarouselSlider(
-              options: CarouselOptions(
-                height: 200,
-                onPageChanged: (index, reason) {
-                  _selectedIndex.value = index;
-                },
-              ),
-              items: sliderListController.sliders.map((slider) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.symmetric(horizontal: 5.0),
-                      decoration: BoxDecoration(
-                        color: AppColors.themeColors,
-                      ),
-                      alignment: Alignment.center,
-                      child: Row(
-                        children: [
-                          Placeholder(
-                            fallbackWidth: 100,
-                            fallbackHeight: 100,
-                          ),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(slider.price ?? "",style: Theme.of(context).textTheme.titleLarge,),
-                                SizedBox(
-                                  width: 100,
-                                    child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.white,
-                                          foregroundColor: AppColors.themeColors
-                                        ),
-                                        onPressed: (){}, child: Text("Buy now")))
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    );
-                  },
-                );
-              }).toList(),
-            ),
+            _buildCarouselSlider(sliderListController),
             const SizedBox(
               height: 8,
             ),
-            ValueListenableBuilder(
-                valueListenable: _selectedIndex,
-                builder: (context, currentIndex, _) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      for (int i = 0; i < 5; i++)
-                        Container(
-                          height: 10,
-                          width: 10,
-                          margin: const EdgeInsets.only(right: 4),
-                          decoration: BoxDecoration(
-                              color: currentIndex == i
-                                  ? AppColors.themeColors
-                                  : null,
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: Colors.grey)),
-                        )
-                    ],
-                  );
-                })
+            _buildCarouselDots(sliderListController)
           ],
         ),
       );
     });
+  }
+
+  Widget _buildCarouselSlider(SliderListController sliderListController) {
+    return CarouselSlider(
+            options: CarouselOptions(
+              height: 200,
+              viewportFraction: 1,
+              onPageChanged: (index, reason) {
+                _selectedIndex.value = index;
+              },
+            ),
+            items: sliderListController.sliders.map((slider) {
+              return Builder(
+                builder: (BuildContext context) {
+                  return Container(
+                    width: MediaQuery.of(context).size.width,
+                    margin: EdgeInsets.symmetric(horizontal: 1),
+                    decoration: BoxDecoration(
+                      color: AppColors.themeColors,borderRadius: BorderRadius.circular(8)
+                    ),
+                    alignment: Alignment.center,
+                    child: Row(
+                      children: [
+                        Placeholder(
+                          fallbackWidth: 100,
+                          fallbackHeight: 100,
+                        ),
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                slider.price ?? "",
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.white,
+                                fontWeight: FontWeight.w600),
+                              ),
+                              SizedBox(height: 16,),
+                              SizedBox(
+                                  width: 100,
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.white,
+                                          foregroundColor:
+                                              AppColors.themeColors),
+                                      onPressed: () {},
+                                      child: Text("Buy now")))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                },
+              );
+            }).toList(),
+          );
+  }
+
+  Widget _buildCarouselDots(SliderListController sliderListController) {
+    return ValueListenableBuilder(
+              valueListenable: _selectedIndex,
+              builder: (context, currentIndex, _) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    for (int i = 0; i < sliderListController.sliders.length; i++)
+                      Container(
+                        height: 10,
+                        width: 10,
+                        margin: const EdgeInsets.only(right: 4),
+                        decoration: BoxDecoration(
+                            color: currentIndex == i
+                                ? AppColors.themeColors
+                                : null,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Colors.grey)),
+                      )
+                  ],
+                );
+              });
   }
 
   @override
