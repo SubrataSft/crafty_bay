@@ -1,3 +1,4 @@
+import 'package:crafty_bay/data/models/product_model.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_details_screen.dart';
 import 'package:crafty_bay/presentation/ui/utils/app_colors.dart';
 import 'package:crafty_bay/presentation/ui/utils/assets_path.dart';
@@ -8,12 +9,15 @@ import 'package:get/get_navigation/get_navigation.dart';
 class ProductCard extends StatelessWidget {
   const ProductCard({
     super.key,
+    required this.product,
   });
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         Get.to(() => ProductDetailsScreen());
       },
       child: Card(
@@ -44,33 +48,44 @@ class ProductCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Product Name",maxLines: 1,style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black87
-                    ),),
+                    Text(
+                      product.title ?? "",
+                      maxLines: 1,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w400, color: Colors.black87),
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("\$100",style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            color:AppColors.themeColors
-                        ),),
+                        Text(
+                          "\$${product.price}.",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.themeColors),
+                        ),
                         Wrap(
                           crossAxisAlignment: WrapCrossAlignment.center,
                           children: [
-                            Icon(Icons.star,color: Colors.amber,),
-                            Text("5",style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black87
-                            ),)
+                            Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                            ),
+                            Text(
+                              "${product.star}",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.black87),
+                            )
                           ],
                         ),
                         Card(
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4)
-                          ),
+                              borderRadius: BorderRadius.circular(4)),
                           color: AppColors.themeColors,
-                          child: Icon(Icons.favorite_outline_rounded,color: Colors.white,),
+                          child: Icon(
+                            Icons.favorite_outline_rounded,
+                            color: Colors.white,
+                          ),
                         )
                       ],
                     ),
